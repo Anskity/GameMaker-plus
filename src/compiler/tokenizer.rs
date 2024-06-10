@@ -7,6 +7,8 @@ impl Keywords {
         let mut map = HashMap::new();
         map.insert("let", TokenType::Let);
         map.insert("const", TokenType::Const);
+        map.insert("function", TokenType::Function);
+        map.insert("return", TokenType::Return);
 
         map
     }
@@ -25,6 +27,9 @@ impl SinglecharTokens {
         map.insert('-', TokenType::BinaryOperator);
         map.insert('*', TokenType::BinaryOperator);
         map.insert('/', TokenType::BinaryOperator);
+        map.insert('{', TokenType::OpenCurly);
+        map.insert('}', TokenType::CloseCurly);
+        map.insert(',', TokenType::Comma);
 
         map
     }
@@ -49,6 +54,13 @@ pub enum TokenType {
     NumericListeral,
     Let,
     Const,
+    Function,
+    Return,
+
+    Comma,
+
+    OpenCurly,
+    CloseCurly,
 
     EOF,
 }
@@ -94,7 +106,11 @@ pub fn tokenize(mut src: String) -> Vec<Token> {
                 }
 
                 let next_char = char_at(&src, 0);
-                if !is_alphabetic(&String::from(next_char)) && next_char != '_' {
+
+                if !is_alphabetic(&next_char.to_string())
+                    && next_char != '_'
+                    && !is_numeric(&next_char.to_string())
+                {
                     break;
                 }
             }

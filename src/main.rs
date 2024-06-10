@@ -9,12 +9,12 @@ use compiler::parser::parse;
 fn main() {
     let config = parse_arguments().unwrap();
 
-    println!("Path: {}\nStrict: {}\n\n", config.path, config.strict);
+    println!("Path: {}\nStrict: {}\n", config.path, config.strict);
 
     let source_code = get_source_code(&config).expect("Couldn't read the source code");
 
     let tokens: Vec<Token> = tokenize(source_code);
-    println!("Tokens: {:?}", tokens);
+    println!("{:?}", tokens);
     let ast = parse(tokens);
 
     ast.display_program(0);

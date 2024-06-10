@@ -25,3 +25,7 @@ pub fn parse_arguments() -> Result<Config, String> {
 pub fn get_source_code(config: &Config) -> Result<String, std::io::Error> {
     std::fs::read_to_string(&config.path)
 }
+
+pub fn get_indent(size: usize, indent: usize) -> String {
+    " ".repeat(size * indent)
+}
