@@ -46,7 +46,6 @@ This is the list of types:
 - string
 - char
 - T[] //For default arrays
-- Array<T> //Advanced arrays (I'll talk about them later)
 - DsList<T>
 - Buffer<T>
 - DsQueue<T>
@@ -54,6 +53,7 @@ This is the list of types:
 - DsPriorityQueue<T>
 - Matrix
 - Tuple<T>
+- Func(T, T)<T>  //For functions
 
 Feature #2 - Advanced Enums:
 
@@ -147,5 +147,42 @@ class Animal {
 var bunny = Animal {name: "bunny", age: 3};
 bunny.age += 1; //This is ok
 bunny.name = "ThePrimeagen" //This throws an error
+```
+
+Feature #6 - Option Enum:
+Yeah, you can use it:
+```
+function get_name(index: Option<int>) -> string {
+    switch (index) {
+    case 1:
+        return Some("John");
+    case 2:
+        return Some("Karen");
+    default:
+        return None;
+    }
+}
+```
+
+
+Feature #7 - Data structures as structs:
+You can use methods in data structures as you would do in javascript or rust:
+
+```
+var array = [2, 5, 6];
+var str_array = array.map(fn(n) => string(n));
+var sorted_array = array.sort(fn(a,b) => b-a);
+
+var two_str = "2";
+var two_num = two_str.parse().unwrap();
+```
+
+Feature #8 - High Order functions:
+You can create high order functions like you would do it in javascript:
+
+```
+function checker(name) -> Func(string)<bool> {
+    return fn(str) => str == name;
+}
 ```
 
