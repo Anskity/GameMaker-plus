@@ -3,12 +3,12 @@ Basically GML with more features
 Feature #1 - Type Anotation:
 You can add type anotation for functions and variables
 
-```j
+```
 
 let life: float = 20;
 
 function is_dead(life) -> bool {
-        return life <= 0
+    return life <= 0
 }
 
 ```
@@ -95,9 +95,11 @@ let numb = sum(a, b);
 Feature #4 - const, let and var:
 There are three types of variables:
 
+```
 const: Can't be changed in any way
 let: normal gamemaker instance variables
 var: normal gamemaker event variables
+```
 
 Feature #5 - Class keyword:
 You can use still use constructors, but classes have additional features
