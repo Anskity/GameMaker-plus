@@ -40,23 +40,36 @@ print(2, "4") //This isn't valid either
 ```
 
 This is the list of types:
+```
 - float 
 - int
 - number
 - string
 - char
-- T[] //For default arrays
+- T[] //For arrays
 - DsList<T>
 - Buffer<T>
 - DsQueue<T>
 - DsStack<T>
+- DsMap<K, V>
 - DsPriorityQueue<T>
 - Matrix
-- Tuple<T>
-- Func(T, T)<T>  //For functions
+- Tuple(T, G, Q, O...) //For tuples
+```
+
+You can use functions as types:
+```
+alert: Fn = fn() => show_message("HI");
+filter_by_evens: Fn(number)<bool> = fn(n) => n%2==0;
+show_numb: Fn(number) = fn(n) => show_message(n);
+```
+
+And you can also create your own types:
+```
+type filter = Fn(number)<bool>;
+```
 
 Feature #2 - Advanced Enums:
-
 You can make enums like in rust:
 
 ```
@@ -177,12 +190,108 @@ var two_str = "2";
 var two_num = two_str.parse().unwrap();
 ```
 
-Feature #8 - High Order functions:
+Feature #8 - Iterators:
+You can iterate through some data structures using the for-in syntax
+
+```
+my_arr = [2, 5, 6];
+for (numb in arr) {
+    if (numb == 2) {
+        show_message("I FOUND IT");
+    }
+}
+
+var action_map: DsMap<char, Fn> = ds_map_create();
+action_map[? 'a'] = fn() => show_message("GOING TO THE LEFT");
+action_map[? 'A'] = fn() => show_message("GOING TO THE LEFT");
+action_map[? 'd'] = fn() => show_message("GOING TO THE RIGHT");
+action_map[? 'D'] = fn() => show_message("GOING TO THE RIGHT");
+
+for ((key, func) in action_map) {
+    if (keyboard_string.last() == key) {
+        func();
+    }
+}
+```
+
+Feature #9 - High Order functions:
 You can create high order functions like you would do it in javascript:
 
 ```
 function checker(name) -> Func(string)<bool> {
     return fn(str) => str == name;
 }
+
+var fireship_checker = checker("fireship");
+
+for (channel in youtube_channels) {
+    if (fireship_checker(channel)) {
+        show_message("I FOUND IT!");
+    }
+}
 ```
 
+Feature #10 - Pattern Matching:
+You can use switch, but you can also use the match statement:
+
+```
+match Shape {
+    Shape::Circle(area) => show_message($"The radius of the circle is: {area}"),
+    Shape::Rectangle(width, height) => show_message($"The width is {width} and the height is {height}"),
+}
+```
+
+When use match, you MUST handle all the possible classes
+
+```
+match Coordinate {
+    Coordinate::X() => show_message("IM THE X COORDINATE"),
+} // this throws an error, because we aren't handling Y or Z
+```
+
+You can use "_" for unexpected cases
+
+```
+match Animal {
+    Animal::Bunny(name) => show_message($"I'm {name}"),
+    Animal::Bee(color) => show_message($"My color is {color}"),
+    _ => show_message("????????????????")
+}
+```
+
+Feature #11 - Tuples:
+You can create tuples:
+
+```
+var position = (0, 1, 5);
+```
+
+And you can access the values inside them using this syntax:
+
+```
+var position = (0, 1, 5);
+var (x, y, z) = position;
+```
+
+OBS: You can also do this with arrays and structs:
+```
+var array = [8, 24, 84];
+var [baby_age, adult_age, emacs_user_age] = array;
+
+var person = {
+    age: 32,
+    name: "Tom"
+};
+var {tom_age, tom_name} = person;
+```
+
+Feature #12 - Error Handling:
+You don't need to have a variable to hold the error when using a try-catch block
+
+```
+try {
+    *my horrible code*
+} catch {
+    *idk, show the values of the variables?????????*
+}
+```
