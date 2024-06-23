@@ -1,0 +1,7 @@
+//Hello world example in GML++
+
+let hello: string = "Hello ";
+let world: string = "world";
+
+show_message(hello.concat(world));
+
