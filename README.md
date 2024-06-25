@@ -1,3 +1,5 @@
+We've changed our repo to: https://github.com/Anskity/GameMaker-PlusPlus
+
 !!!STILL IN DEVELOPMENT!!!
 
 Basically GML with more features
